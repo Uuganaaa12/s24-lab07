@@ -9,8 +9,50 @@ package edu.cmu.cs.cs214.rec04;
  * @author Nora Shoemaker
  *
  */
+public class DelegationSortedIntList implements IntegerList {
 
-public class DelegationSortedIntList {
-    // Write your implementation below with API documentation
+    private final SortedIntList delegateList;
 
+    private int totalAdded;
+
+    public DelegationSortedIntList() {
+        delegateList = new SortedIntList();
+        totalAdded = 0;
+    }
+
+    @Override
+    public boolean add(int num) {
+        totalAdded++;
+        return delegateList.add(num);
+    }
+
+    @Override
+    public boolean addAll(IntegerList list) {
+        totalAdded += list.size();
+        return delegateList.addAll(list);
+    }
+
+    @Override
+    public int get(int index) {
+        return delegateList.get(index);
+    }
+
+    @Override
+    public boolean remove(int num) {
+        return delegateList.remove(num);
+    }
+
+    @Override
+    public boolean removeAll(IntegerList list) {
+        return delegateList.removeAll(list);
+    }
+
+    @Override
+    public int size() {
+        return delegateList.size();
+    }
+
+    public int getTotalAdded() {
+        return totalAdded;
+    }
 }
